@@ -1,0 +1,13 @@
+.Home {
+    text-align: center;
+
+    
+  }
+  .Home-heder{
+    color: white;
+    flex: 1 
+  }
+  .heder{
+display: 'flex';
+flex-wrap: wrap;
+  }
