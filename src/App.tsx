@@ -6,19 +6,13 @@ import Home from './pages/Home/Home';
 import Edit from './pages/Edit/Edit';
 import Add from './pages/Add/Add';
 import { useParams } from "react-router";
+import { ParentComponnent } from './pages/ParentComponnent';
 
 function App() {
 
   return (
     <div className="App">
-     <BrowserRouter>
-    <Routes>
-      <Route path="/"  element={<Home />} />
-    <Route path="/edit/:id" element={<Edit />} />
-    <Route path="/add" element={<Add />} />
-    </Routes>
-  </BrowserRouter>
-   
+      <ParentComponnent/>
     </div>
   );
 }

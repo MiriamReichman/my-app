@@ -21,7 +21,7 @@ const BackButton: React.FC = () => {
   const classes = useStyles();
   const navigate = useNavigate();
   const back = (event: React.MouseEvent) => {
-    navigate('/');
+    navigate('/')
   }
   return <div>
     <ArrowCircleLeftIcon onClick={back} className={classes.root} />

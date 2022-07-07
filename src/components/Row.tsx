@@ -12,7 +12,8 @@ const Row: React.FC<{ item: Song }> = (props) => {
 const dispatch = useAppDispatch();
 const navigate = useNavigate();
   const handelEdit = () => {
-    navigate(`/edit/${props.item.id}`);
+    navigate(`/songs/edit/${props.item.id}`)
+  
   }
   const deletHendler = (): void => {
    dispatch(deleteSongAction(props.item.id));

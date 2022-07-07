@@ -17,17 +17,17 @@ import { receivedSongs,getSongsAction } from '../../store/songSlice'
 const Home = () => {
 
     const dispatch = useAppDispatch();
-    useEffect(() => {
-        //get products from api
-        // const songs = [new Song('123', 'blessing', 'Beni Fredman', Gener.POP, 1, 40),
-        // new Song('1234', 'blessing@', 'Beni Fredman', Gener.POP, 1, 40)]
-        dispatch(getSongsAction());
+    // useEffect(() => {
+    //     //get products from api
+    //     // const songs = [new Song('123', 'blessing', 'Beni Fredman', Gener.POP, 1, 40),
+    //     // new Song('1234', 'blessing@', 'Beni Fredman', Gener.POP, 1, 40)]
+    //     dispatch(getSongsAction());
 
-    }, [])
+    // }, [])
     const songsList = useAppSelector(state => state.songs.songs)
     const navigate = useNavigate();
     const add = () => {
-        navigate('/add');
+        navigate('/songs/new');
     }
     return <div className='Home'>
 
