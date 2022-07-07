@@ -16,15 +16,17 @@ import { useAppSelector, useAppDispatch } from '../../store/hook';
 import { receivedSongs,getSongsAction } from '../../store/songSlice'
 const Home = () => {
 
-    const dispatch = useAppDispatch();
+    // const dispatch = useAppDispatch();
+    const songsList= useAppSelector(state => state.songs.songs);
     // useEffect(() => {
     //     //get products from api
     //     // const songs = [new Song('123', 'blessing', 'Beni Fredman', Gener.POP, 1, 40),
     //     // new Song('1234', 'blessing@', 'Beni Fredman', Gener.POP, 1, 40)]
-    //     dispatch(getSongsAction());
-
+    //    // dispatch(getSongsAction());
+    //    debugger;
+    //    setSongsList(useAppSelector(state => state.songs.songs)) ;
     // }, [])
-    const songsList = useAppSelector(state => state.songs.songs)
+
     const navigate = useNavigate();
     const add = () => {
         navigate('/songs/new');

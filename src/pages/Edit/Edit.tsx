@@ -32,19 +32,22 @@ import {
     const dispatch = useAppDispatch(); 
     const { id } = useParams();
     const songsList = useAppSelector(state => state.songs.songs)  
-    let getSongToEdit: Song=new Song('', '', '', Gener.CLASSICAL, 0, 0);
-    useEffect(() => {
-      const getSongById = (id: string): Song => {
-        let songToReturn: Song = new Song(id, '', '', Gener.CLASSICAL, 0, 0);
-        geSongById(id).then((song) => {
-            if (song !== null && typeof song !== "string") {
-                songToReturn = song;
-            }
-        });
-        return songToReturn;
-    }
-   getSongToEdit= getSongById(id || '');
-    }, [id])
+    const getSongToEdit=songsList.find(song => song.id === id)||new Song('','','',2,0,0);
+    //WHAT IS THE MORE CURRECT WAY TO GET THE ELEMENT TO EDIT FROM REDUX OR FROM SERVER ?
+    //---------
+  //   let getSongToEdit: Song=new Song('', '', '', Gener.CLASSICAL, 0, 0);
+  //   useEffect(() => {
+  //     const getSongById = (id: string): Song => {
+  //       let songToReturn: Song = new Song(id, '', '', Gener.CLASSICAL, 0, 0);
+  //       geSongById(id).then((song) => {
+  //           if (song !== null && typeof song !== "string") {
+  //               songToReturn = song;
+  //           }
+  //       });
+  //       return songToReturn;
+  //   }
+  //  getSongToEdit= getSongById(id || '');
+  //   }, [id])
     //------------
     const validationSchema = Yup.object({
         title:

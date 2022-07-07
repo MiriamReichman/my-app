@@ -6,7 +6,7 @@ import { Song,AddSong } from '../Song';
 export async function createSong(song:AddSong) {
   try {
     // 👇️ const data: CreateUserResponse
-    const { data } = await axios.post<string>(
+    const { data } = await axios.post<Song>(
       'http://localhost:8989/Songs',
       song,
       {
@@ -22,7 +22,7 @@ export async function createSong(song:AddSong) {
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log('error message: ', error.message);
+      alert('error message: '+ error.message);
       // 👇️ error: AxiosError<any, any>
       return error.message;
     } else {
