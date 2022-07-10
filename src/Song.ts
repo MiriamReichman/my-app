@@ -32,7 +32,7 @@ export interface AddSong {
   title:string,
   artist:string,
 
- gener: Gener.POP,
+ gener?: Gener,
   length:number,
    price: number
 };

@@ -16,7 +16,7 @@ import { useAppSelector, useAppDispatch } from '../../store/hook';
 
 
 const Add: React.FC<{addNewSong:Function}> = (props) => {
-  const song: AddSong = {title: '', artist: '', gener: Gener.POP, length: 0, price: 0 }
+  const song: AddSong = {title: '', artist: '', length: 0, price: 0 }
 
   const validationSchema = Yup.object({
     title:
@@ -78,14 +78,16 @@ const Add: React.FC<{addNewSong:Function}> = (props) => {
             id="Gener"
             select
             label="Gener"
-            value={formik.values.gener}
+            value={formik.values.gener }
+            onChange={formik.handleChange}
             onSelect={formik.handleChange}
             error={formik.touched.gener && Boolean(formik.errors.gener)}
             helperText={formik.touched.gener && formik.errors.gener}
-          >
-            {generTypes.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option.valueOf()}
+          >  
+       
+            {generTypes.map((option:Gener,index:number) => (
+              <MenuItem key={option+index} value={Gener[option]}>
+                {Gener[option]}
               </MenuItem>
             ))}
           </TextField>
@@ -130,7 +132,19 @@ export default Add;
 
 
 
-
+/*  <Select
+    name="state"
+    id="state"
+    onBlur={() => setFieldTouched("state", true)}
+    onChange={(opt, e) => {
+      this.handleState(opt);
+      handleChange(e);
+      setFieldValue("state", opt.value);
+    }}
+    options={newStateList}
+    error={errors.state}
+    touched={touched.state}
+  />*/ 
 
 
 

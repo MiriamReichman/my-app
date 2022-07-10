@@ -9,7 +9,7 @@ const Row: React.FC<{ item: Song,deleteSong:Function }> = (props) => {
 
 
 const navigate = useNavigate();
-  const handelEdit = () => {
+  const handelEdit = ():void => {
     navigate(`/songs/edit/${props.item.id}`)
   
   }

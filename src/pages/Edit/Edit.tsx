@@ -94,14 +94,15 @@ import {
             id="Gener"
             select
             label="Gener"
-            value={formik.values.gener}
+            value={Gener[formik.values.gener]}
             onSelect={formik.handleChange}
             error={formik.touched.gener && Boolean(formik.errors.gener)}
             helperText={formik.touched.gener && formik.errors.gener}
           >
-            {generTypes.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option.valueOf()}
+            {generTypes.map((option:Gener,index:number) => (
+          
+              <MenuItem key={option+index} value={option}>
+                {Gener[option]}
               </MenuItem>
             ))}
           </TextField>
