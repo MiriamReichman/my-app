@@ -2,11 +2,8 @@ import axios from 'axios';
 
 import  {Song} from '../Song'
 
-import{SongsState}from '../store/songSlice'
 
-
-
-export async function geSongs() {
+export async function geSongs():Promise<Song[]|string>{
   try {
     // 👇️ const data: GetUsersResponse
     const { data, status } = await axios.get<Song[]>(

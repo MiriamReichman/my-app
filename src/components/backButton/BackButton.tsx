@@ -23,9 +23,9 @@ const BackButton: React.FC = () => {
   const back = (event: React.MouseEvent) => {
     navigate('/')
   }
-  return <div>
+  return <>
     <ArrowCircleLeftIcon onClick={back} className={classes.root} />
-  </div>;
+  </>;
 }
 
 

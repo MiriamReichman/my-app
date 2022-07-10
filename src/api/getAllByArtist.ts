@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { Song } from '../Song'
 
-export async function geSongsByArtist(artist: string) {
+export async function geSongsByArtist(artist: string):Promise<Song[]|string> {
     try {
         // 👇️ const data: GetUsersResponse
         const { data, status } = await axios.get<Song[]>(

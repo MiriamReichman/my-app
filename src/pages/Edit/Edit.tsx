@@ -64,6 +64,7 @@ import {
         }
     });
     const generTypes = [Gener.CLASSICAL, Gener.POP, Gener.RAP, Gener.ROCK]
+    console.log(formik.values.gener)
     return <>
         <h1>Edit Song</h1>
         {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}

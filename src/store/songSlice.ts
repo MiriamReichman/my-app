@@ -1,13 +1,14 @@
 import { AddShoppingCart } from "@mui/icons-material";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Gener, Song, AddSong } from "../Song";
-import { current } from '@reduxjs/toolkit'
+
 import { geSongs } from '../api/apiCalles'
 import { createSong } from '../api/post';
 import { geSongsByArtist } from "../api/getAllByArtist";
 import { deleteSong } from "../api/delete";
 import { geSongById } from "../api/getById";
 import { updateSong } from "../api/put";
+import { AppDispatch } from "./Store";
 export interface SongsState {
     songs: Song[]
 }
@@ -56,7 +57,7 @@ const songsSlice = createSlice({
 
 
 export const getSongsAction = () => {
-    return (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         const fetchData = async () => {
             return await geSongs();
         }
@@ -72,7 +73,7 @@ export const getSongsAction = () => {
 }
 
 export const addSongsAction = (song: AddSong) => {
-    return (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         const fetchData = async () => {
             return await createSong(song);
         }
@@ -89,7 +90,7 @@ export const addSongsAction = (song: AddSong) => {
 
 export const getSongsByArtist = (artist: string) => {
     debugger
-    return (dispatch: any) => {
+    return (dispatch: AppDispatch) => {
         const fetchData = async () => {
             return await geSongsByArtist(artist)
         }
@@ -112,11 +113,12 @@ export const getSongsByArtist = (artist: string) => {
 
 export const deleteSongAction = (id: string) => {
     debugger;
-    return (dispatch: any) => {
+    return (dispatch: AppDispatch) => {
         const fetchData = async () => { return await deleteSong(id) }
         fetchData().then((data: string) => {
             alert(data);
-            dispatch(deleteSongRedux(id))
+            if (data === "deleted document")
+                dispatch(deleteSongRedux(id))
         })
     }
 }
@@ -124,7 +126,7 @@ export const deleteSongAction = (id: string) => {
 
 export const editSongThunk = (song: Song, id: string) => {
     debugger;
-    return (dispatch: any) => {
+    return (dispatch: AppDispatch) => {
         const fetchData = async () => { return await updateSong(song, id) }
         fetchData().then((data) => {
             debugger

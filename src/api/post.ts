@@ -3,7 +3,7 @@ import { Song,AddSong } from '../Song';
 
 
 
-export async function createSong(song:AddSong) {
+export async function createSong(song:AddSong):Promise<Song|string> {
   try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<Song>(

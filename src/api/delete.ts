@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 
-export async function deleteSong(id: string) {
+export async function deleteSong(id: string):Promise<string> {
   try {
     // 👇️ const data: UpdateUserResponse
     const { data, status } = await axios.delete<string>(
