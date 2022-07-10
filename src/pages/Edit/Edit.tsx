@@ -1,20 +1,10 @@
 import React, { useEffect } from 'react';
-
 import BackButton from '../../components/backButton/BackButton';
-import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
 import { Gener, Song } from '../../Song';
 import { useParams } from 'react-router-dom';
-import { editSong, editSongThunk } from '../../store/songSlice'
-
-import { useAppSelector, useAppDispatch } from '../../store/hook';
-import { string } from 'yup';
-import { geSongById } from '../../api/getById';
-
-
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {
     Formik,
@@ -28,11 +18,11 @@ import {
 
 
 
- const Edit: React.FC = (props) => {
-    const dispatch = useAppDispatch(); 
+ const Edit: React.FC<{songsList:Song[],editSong:Function}> = (props) => {
+ 
     const { id } = useParams();
-    const songsList = useAppSelector(state => state.songs.songs)  
-    const getSongToEdit=songsList.find(song => song.id === id)||new Song('','','',2,0,0);
+    
+    const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','',2,0,0);
     //WHAT IS THE MORE CURRECT WAY TO GET THE ELEMENT TO EDIT FROM REDUX OR FROM SERVER ?
     //---------
   //   let getSongToEdit: Song=new Song('', '', '', Gener.CLASSICAL, 0, 0);
@@ -66,10 +56,8 @@ import {
         validationSchema: validationSchema,
         onSubmit: (values: Song, { setSubmitting }: FormikHelpers<Song>) => {
             debugger
-            //console.log('will soon use dispatch with this action name:',props.onsubmit)
             console.log({ values, setSubmitting });
-            dispatch(editSongThunk(values,id||''));
-
+            props.editSong(values,id)
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
 

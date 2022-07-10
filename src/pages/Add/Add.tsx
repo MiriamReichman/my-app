@@ -1,14 +1,12 @@
 import React from 'react'
 import BackButton from '../../components/backButton/BackButton'
-import Hook from '../../components/makestyiletest'
-import SongInfoForm from '../../components/SongInfoForm/SongInfoForm'
 import { Song, Gener,AddSong } from '../../Song'
 import './Add.css'
-import { addSong } from '../../store/songSlice'
+
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { maxWidth } from '@mui/system';
+
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {
   Formik, FormikHelpers, FormikProps,  Form, Field, ErrorMessage, useFormik  //FieldProps,
@@ -17,7 +15,7 @@ import { addSongtype, addSongsAction } from '../../store/songSlice';
 import { useAppSelector, useAppDispatch } from '../../store/hook';
 
 
-const Add: React.FC = () => {
+const Add: React.FC<{addNewSong:Function}> = (props) => {
   const song: AddSong = {title: '', artist: '', gener: Gener.POP, length: 0, price: 0 }
 
   const validationSchema = Yup.object({
@@ -30,7 +28,7 @@ const Add: React.FC = () => {
       .required('length is required'),
   });
 
-  const dispatch = useAppDispatch();
+
   const initialValues: AddSong = song;
   const formik = useFormik({
     initialValues: initialValues,
@@ -39,7 +37,7 @@ const Add: React.FC = () => {
       debugger
       //console.log('will soon use dispatch with this action name:',props.onsubmit)
       console.log({ values, setSubmitting });
-      dispatch(addSongsAction(values));
+      props.addNewSong(values);
 
       alert(JSON.stringify(values, null, 2));
       setSubmitting(false);

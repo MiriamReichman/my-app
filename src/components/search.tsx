@@ -9,9 +9,9 @@ import { useAppDispatch } from '../store/hook';
 import { getSongsByArtist } from '../store/songSlice';
 
 
-const Search: React.FC = (props) => {
+const Search: React.FC<{searchArtist:Function}> = (props) => {
   const [search, setSearch] = useState('')
-  const dispatch = useAppDispatch();
+  
   return (
     <Paper
       component="form"
@@ -30,7 +30,7 @@ const Search: React.FC = (props) => {
       // onMouseLeave={()=>dispatch(getSongsByArtist(search))}
       />
   
-      <SearchIcon sx={{ p: '5px' }} type="submit" onClick={() => { dispatch(getSongsByArtist(search)) }} />
+      <SearchIcon sx={{ p: '5px' }} type="submit" onClick={() => { props.searchArtist(search) }} />
 
 
     </Paper>

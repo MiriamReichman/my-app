@@ -4,19 +4,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Song } from '../Song';
 import './Row.css'
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../store/hook';
-import {deleteSongAction} from '../store/songSlice'
-const Row: React.FC<{ item: Song }> = (props) => {
 
-  
-const dispatch = useAppDispatch();
+const Row: React.FC<{ item: Song,deleteSong:Function }> = (props) => {
+
+
 const navigate = useNavigate();
   const handelEdit = () => {
     navigate(`/songs/edit/${props.item.id}`)
   
   }
   const deletHendler = (): void => {
-   dispatch(deleteSongAction(props.item.id));
+    props.deleteSong(props.item.id)
+
 
   }
 
