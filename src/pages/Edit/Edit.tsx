@@ -15,6 +15,7 @@ import {
     //FieldProps,
 } from 'formik';
 import { geSongById } from '../../api/getById';
+import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
 
 
 
@@ -67,84 +68,86 @@ import { geSongById } from '../../api/getById';
     });
     const genreTypes = [Genre.CLASSICAL, Genre.POP, Genre.RAP, Genre.ROCK]
     console.log(Genre[formik.initialValues.genre])
-    return <>
-        <h1>Edit Song</h1>
-        {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
-        <form onSubmit={formik.handleSubmit} >
-          <TextField id="title"
+    if (data){return <>
+      <h1>Edit Song</h1>
+      {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
+      <form onSubmit={formik.handleSubmit} >
+        <TextField id="title"
 
-            sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            name="title"
-            label="title"
-            type="text"
-            value={formik.values.title}
-            onChange={formik.handleChange}
-            error={formik.touched.title && Boolean(formik.errors.title)}
-            helperText={formik.touched.title && formik.errors.title} />
-          <br></br>
-          <TextField
-            sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="artist"
-            name="artist"
-            label="artist"
-            value={formik.values.artist}
-            onChange={formik.handleChange}
-            error={formik.touched.artist && Boolean(formik.errors.artist)}
-            helperText={formik.touched.artist && formik.errors.artist}
-          />
-          <br></br>
-          <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="Genre"
-            select
-            label="Genre"
-            value={Genre[formik.values.genre]}
-            onSelect={formik.handleChange}
-            error={formik.touched.genre && Boolean(formik.errors.genre)}
-            helperText={formik.touched.genre && formik.errors.genre}
-          >
-            {
-            genreTypes.map((option:Genre,index:number) => (
-          
-              <MenuItem key={Genre[option]+index} value={Genre[option]}>
-                {Genre[option]}
-              </MenuItem>
-            ))}
-          </TextField>
+          sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
+          name="title"
+          label="title"
+          type="text"
+          value={formik.values.title}
+          onChange={formik.handleChange}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.touched.title && formik.errors.title} />
+        <br></br>
+        <TextField
+          sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
+          id="artist"
+          name="artist"
+          label="artist"
+          value={formik.values.artist}
+          onChange={formik.handleChange}
+          error={formik.touched.artist && Boolean(formik.errors.artist)}
+          helperText={formik.touched.artist && formik.errors.artist}
+        />
+        <br></br>
+        <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
+          id="Genre"
+          select
+          label="Genre"
+          value={Genre[formik.values.genre]}
+          onSelect={formik.handleChange}
+          error={formik.touched.genre && Boolean(formik.errors.genre)}
+          helperText={formik.touched.genre && formik.errors.genre}
+        >
+          {
+          genreTypes.map((option:Genre,index:number) => (
+        
+            <MenuItem key={Genre[option]+index} value={Genre[option]}>
+              {Genre[option]}
+            </MenuItem>
+          ))}
+        </TextField>
 
-          <br></br>
-          <TextField
-            sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="length"
-            name="length"
-            label="length"
-            type="number"
-            value={formik.values.length}
-            onChange={formik.handleChange}
-            error={formik.touched.length && Boolean(formik.errors.length)}
-            helperText={formik.touched.length && formik.errors.length}
-          />
-          <br></br>
-          <TextField
-            sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="price"
-            name="price"
-            label="price"
-            type="number"
-            value={formik.values.price}
-            onChange={formik.handleChange}
-            error={formik.touched.price && Boolean(formik.errors.price)}
-            helperText={formik.touched.price && formik.errors.price}
-          />
-          <br></br>
-          <Button color="primary" variant="contained" type="submit">
-           Edit </Button>
-        </form>
- 
+        <br></br>
+        <TextField
+          sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
+          id="length"
+          name="length"
+          label="length"
+          type="number"
+          value={formik.values.length}
+          onChange={formik.handleChange}
+          error={formik.touched.length && Boolean(formik.errors.length)}
+          helperText={formik.touched.length && formik.errors.length}
+        />
+        <br></br>
+        <TextField
+          sx={{ backgroundColor: 'white', borderRadius: 2, margin: 2 }}
+          id="price"
+          name="price"
+          label="price"
+          type="number"
+          value={formik.values.price}
+          onChange={formik.handleChange}
+          error={formik.touched.price && Boolean(formik.errors.price)}
+          helperText={formik.touched.price && formik.errors.price}
+        />
+        <br></br>
+        <Button color="primary" variant="contained" type="submit">
+         Edit </Button>
+      </form>
+
+
+    <BackButton />
 
       <BackButton />
-
-        <BackButton />
-    </>
+  </>
+  }
+  else return <><h1>no song yet...</h1></>
     
 }
 
