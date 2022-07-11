@@ -6,15 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 import './Home.css'
 
-import Search from '../../components/search';
+import Search from '../../components/searchInput/search';
 import CustomizedTables from '../../components/table';
-import Row from '../../components/Row';
+import Row from '../../components/Header and Rows/Row';
 
 import { Gener, Song } from '../../Song';
-import HederTitels from '../../components/HederTitels';
-import { useAppSelector, useAppDispatch } from '../../store/hook';
-import { receivedSongs,getSongsAction } from '../../store/songSlice'
-import { RootState } from '../../store/Store';
+import HederTitels from '../../components/Header and Rows/HederTitels';
+
 const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Function}>= (props) => {
 
 
