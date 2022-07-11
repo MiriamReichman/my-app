@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BackButton from '../../components/backButton/BackButton';
 import {Genre, Song } from '../../Song';
 import { useParams } from 'react-router-dom';
@@ -14,6 +14,7 @@ import {
     Field, ErrorMessage, useFormik
     //FieldProps,
 } from 'formik';
+import { geSongById } from '../../api/getById';
 
 
 
@@ -23,22 +24,21 @@ import {
     const { id } = useParams();
     
     const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','',2,0,0);
+    const [editId, setEditId]=useState(new Song('','','',2,0,0))
+    let data:Song|string|null=null
+    useEffect(()=>{
+      debugger
+        const func=async() =>{
+         data= await geSongById(id||'')
+        if(typeof data !=='string' )
+            setEditId(data)
+      }
+      func()
+  
+    }
+    ,[])
     //WHAT IS THE MORE CURRECT WAY TO GET THE ELEMENT TO EDIT FROM REDUX OR FROM SERVER ?
-    //---------
-  //   let getSongToEdit: Song=new Song('', '', '', Genre.CLASSICAL, 0, 0);
-  //   useEffect(() => {
-  //     const getSongById = (id: string): Song => {
-  //       let songToReturn: Song = new Song(id, '', '', Genre.CLASSICAL, 0, 0);
-  //       geSongById(id).then((song) => {
-  //           if (song !== null && typeof song !== "string") {
-  //               songToReturn = song;
-  //           }
-  //       });
-  //       return songToReturn;
-  //   }
-  //  getSongToEdit= getSongById(id || '');
-  //   }, [id])
-    //------------
+
     const validationSchema = Yup.object({
         title:
             Yup.string()
@@ -50,7 +50,9 @@ import {
     });
 
 
-    const initialValues: Song = getSongToEdit;
+ 
+
+    const initialValues: Song =editId// getSongToEdit;
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validationSchema,
@@ -100,9 +102,10 @@ import {
             error={formik.touched.genre && Boolean(formik.errors.genre)}
             helperText={formik.touched.genre && formik.errors.genre}
           >
-            {genreTypes.map((option:Genre,index:number) => (
+            {
+            genreTypes.map((option:Genre,index:number) => (
           
-              <MenuItem key={option+index} value={Genre[option]}>
+              <MenuItem key={Genre[option]+index} value={Genre[option]}>
                 {Genre[option]}
               </MenuItem>
             ))}
@@ -145,8 +148,10 @@ import {
     
 }
 
+ 
 
-
+  
+ 
 
 export  default Edit
 

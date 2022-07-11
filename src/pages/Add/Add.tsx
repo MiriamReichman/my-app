@@ -85,7 +85,7 @@ const Add: React.FC<{addNewSong:Function}> = (props) => {
           >  
        
             {genreTypes.map((option:Genre,index:number) => (
-              <MenuItem key={option+index} value={Genre[option]}>
+              <MenuItem key={Genre[option]+index} value={Genre[option]}>
                 {Genre[option]}
               </MenuItem>
             ))}
