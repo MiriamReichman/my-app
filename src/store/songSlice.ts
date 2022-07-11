@@ -1,6 +1,6 @@
-import { AddShoppingCart } from "@mui/icons-material";
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Gener, Song, AddSong } from "../Song";
+import { Genre, Song, AddSong } from "../Song";
 
 import { geSongs } from '../api/apiCalles'
 import { createSong } from '../api/post';
@@ -69,55 +69,55 @@ export const getSongsAction = () => {
 
 export const addSongsAction = (song: AddSong) => {
     return async (dispatch: AppDispatch) => {
-            const Newsong: Song | string = await createSong(song);
-            if (Newsong !== null)
-                if (typeof Newsong !== "string")
-                    dispatch(addSong(Newsong))
-                else alert(Newsong)
- 
+        const Newsong: Song | string = await createSong(song);
+        if (Newsong !== null)
+            if (typeof Newsong !== "string")
+                dispatch(addSong(Newsong))
+            else alert(Newsong)
+
     }
 }
 
 export const getSongsByArtist = (artist: string) => {
-    debugger
+
     return async (dispatch: AppDispatch) => {
-     
-           const songs: Song[] |string= await geSongsByArtist(artist)
-           if (songs === null || songs.length === 0) {
+
+        const songs: Song[] | string = await geSongsByArtist(artist)
+        if (songs === null || songs.length === 0) {
             alert("no songs found for artist: " + artist)
-                   //find out if this is nessery/menning do we need to re render home page to show all songs 
-                //or is the last song search okay?
-                dispatch(getSongsAction());
-           }
-               else if (typeof songs !== "string")
-                    dispatch(receivedSongs(songs))
+            //find out if this is nessery/menning do we need to re render home page to show all songs 
+            //or is the last song search okay?
+            dispatch(getSongsAction());
+        }
+        else if (typeof songs !== "string")
+            dispatch(receivedSongs(songs))
 
     }
 }
 
 export const deleteSongAction = (id: string) => {
-    debugger;
-    return async(dispatch: AppDispatch) => {
-        const data:string =await deleteSong(id) 
-            alert(data);
-            if (data === "deleted document")
-                dispatch(deleteSongRedux(id))
-     
+
+    return async (dispatch: AppDispatch) => {
+        const data: string = await deleteSong(id)
+        alert(data);
+        if (data === "deleted document")
+            dispatch(deleteSongRedux(id))
+
     }
 }
 
 
 export const editSongThunk = (song: Song, id: string) => {
-    debugger;
-    return async (dispatch: AppDispatch) => {
-        const data: Song|string=  await updateSong(song, id) 
-    
-            if (typeof data !== 'string') {
 
-                dispatch(editSong(song))
-            }
-            else alert(data);
-        
+    return async (dispatch: AppDispatch) => {
+        const data: Song | string = await updateSong(song, id)
+
+        if (typeof data !== 'string') {
+
+            dispatch(editSong(song))
+        }
+        else alert(data);
+
     }
 }
 export type addSongtype = typeof addSong;

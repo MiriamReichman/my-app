@@ -34,13 +34,13 @@ function createData(
   id: string,
   title: string,
   artist: string,
-  gener: string,
+  genre: string,
   price: number,
 ) {
   return { id,
     title,
     artist,
-    gener,
+    genre,
     price};
 }
 
@@ -60,7 +60,7 @@ export default function CustomizedTables() {
             <StyledTableCell>id</StyledTableCell>
             <StyledTableCell align="right">title</StyledTableCell>
             <StyledTableCell align="right">artist</StyledTableCell>
-            <StyledTableCell align="right">gener</StyledTableCell>
+            <StyledTableCell align="right">genre</StyledTableCell>
             <StyledTableCell align="right">price</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -72,7 +72,7 @@ export default function CustomizedTables() {
               </StyledTableCell>
               <StyledTableCell align="right">{row.title}</StyledTableCell>
               <StyledTableCell align="right">{row.artist}</StyledTableCell>
-              <StyledTableCell align="right">{row.gener}</StyledTableCell>
+              <StyledTableCell align="right">{row.genre}</StyledTableCell>
               <StyledTableCell align="right">{row.price}</StyledTableCell>
             </StyledTableRow>
           ))}

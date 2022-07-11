@@ -13,7 +13,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { maxWidth } from '@mui/system';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { Gener, Song } from '../../Song';
+import { Genre, Song } from '../../Song';
 
 
 import { addSongtype } from '../../store/songSlice';
@@ -22,7 +22,7 @@ import { useAppSelector, useAppDispatch } from '../../store/hook';
 const validationSchema = Yup.object({
   title:
     Yup.string()
-      .required('gener is required'),
+      .required('Genre is required'),
   length: Yup
     .string()
     .min(2, 'length should be of minimum 2 characters length')
@@ -30,7 +30,6 @@ const validationSchema = Yup.object({
 });
 
 
-// {id:'' ,title: '', artist: '', gener:1,length: 0,price:0}
 
 const SongInfoForm: React.FC<{ song: Song, buttonDescription: string, action: addSongtype }> = (props) => {
 
@@ -52,7 +51,7 @@ const SongInfoForm: React.FC<{ song: Song, buttonDescription: string, action: ad
     }
 
   });
-  const generTypes = [Gener.CLASSICAL, Gener.POP, Gener.RAP, Gener.ROCK]
+  const genreTypes = [Genre.CLASSICAL, Genre.POP, Genre.RAP, Genre.ROCK]
 
 
   return (
@@ -85,15 +84,15 @@ const SongInfoForm: React.FC<{ song: Song, buttonDescription: string, action: ad
         />
         <br></br>
         <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-          id="Gener"
+          id="Genre"
           select
-          label="Gener"
-          value={formik.values.gener}
+          label="Genre"
+          value={formik.values.genre}
           onSelect={formik.handleChange}
-          error={formik.touched.gener && Boolean(formik.errors.gener)}
-          helperText={formik.touched.gener && formik.errors.gener}
+          error={formik.touched.genre && Boolean(formik.errors.genre)}
+          helperText={formik.touched.genre && formik.errors.genre}
         >
-          {generTypes.map((option) => (
+          {genreTypes.map((option) => (
             <MenuItem key={option} value={option}>
               {option.valueOf()}
             </MenuItem>

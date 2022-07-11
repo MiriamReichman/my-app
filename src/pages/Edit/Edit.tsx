@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import BackButton from '../../components/backButton/BackButton';
-import { Gener, Song } from '../../Song';
+import {Genre, Song } from '../../Song';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
@@ -25,10 +25,10 @@ import {
     const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','',2,0,0);
     //WHAT IS THE MORE CURRECT WAY TO GET THE ELEMENT TO EDIT FROM REDUX OR FROM SERVER ?
     //---------
-  //   let getSongToEdit: Song=new Song('', '', '', Gener.CLASSICAL, 0, 0);
+  //   let getSongToEdit: Song=new Song('', '', '', Genre.CLASSICAL, 0, 0);
   //   useEffect(() => {
   //     const getSongById = (id: string): Song => {
-  //       let songToReturn: Song = new Song(id, '', '', Gener.CLASSICAL, 0, 0);
+  //       let songToReturn: Song = new Song(id, '', '', Genre.CLASSICAL, 0, 0);
   //       geSongById(id).then((song) => {
   //           if (song !== null && typeof song !== "string") {
   //               songToReturn = song;
@@ -42,7 +42,7 @@ import {
     const validationSchema = Yup.object({
         title:
             Yup.string()
-                .required('gener is required'),
+                .required('genre is required'),
         length: Yup
             .number()
             .min(2, 'length should be of minimum 2 ')
@@ -63,8 +63,8 @@ import {
 
         }
     });
-    const generTypes = [Gener.CLASSICAL, Gener.POP, Gener.RAP, Gener.ROCK]
-    console.log(formik.values.gener)
+    const genreTypes = [Genre.CLASSICAL, Genre.POP, Genre.RAP, Genre.ROCK]
+    console.log(Genre[formik.initialValues.genre])
     return <>
         <h1>Edit Song</h1>
         {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
@@ -92,18 +92,18 @@ import {
           />
           <br></br>
           <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="Gener"
+            id="Genre"
             select
-            label="Gener"
-            value={Gener[formik.values.gener]}
+            label="Genre"
+            value={Genre[formik.values.genre]}
             onSelect={formik.handleChange}
-            error={formik.touched.gener && Boolean(formik.errors.gener)}
-            helperText={formik.touched.gener && formik.errors.gener}
+            error={formik.touched.genre && Boolean(formik.errors.genre)}
+            helperText={formik.touched.genre && formik.errors.genre}
           >
-            {generTypes.map((option:Gener,index:number) => (
+            {genreTypes.map((option:Genre,index:number) => (
           
-              <MenuItem key={option+index} value={option}>
-                {Gener[option]}
+              <MenuItem key={option+index} value={Genre[option]}>
+                {Genre[option]}
               </MenuItem>
             ))}
           </TextField>
