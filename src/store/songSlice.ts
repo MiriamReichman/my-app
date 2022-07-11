@@ -58,84 +58,66 @@ const songsSlice = createSlice({
 
 export const getSongsAction = () => {
     return async (dispatch: AppDispatch) => {
-        const fetchData = async () => {
-            return await geSongs();
-        }
-        fetchData().then((data: Song[] | string) => {
-            if (typeof data !== "string") {
-                console.log(data + "ii")
-                dispatch(receivedSongs(data))
-            }
+        const songs: Song[] | string = await geSongs();
+        if (songs !== null)
+            if (typeof songs !== "string")
+                dispatch(receivedSongs(songs))
+            else alert(songs)
 
-            else alert(data)
-        })
     }
 }
 
 export const addSongsAction = (song: AddSong) => {
     return async (dispatch: AppDispatch) => {
-        const fetchData = async () => {
-            return await createSong(song);
-        }
-        fetchData().then((data: Song | string) => {
-            if (typeof data !== 'string') {
-                console.log(data + "ii");
-                dispatch(addSong(data))
-            }
-
-            else alert(data)
-        })
+            const Newsong: Song | string = await createSong(song);
+            if (Newsong !== null)
+                if (typeof Newsong !== "string")
+                    dispatch(addSong(Newsong))
+                else alert(Newsong)
+ 
     }
 }
 
 export const getSongsByArtist = (artist: string) => {
     debugger
-    return (dispatch: AppDispatch) => {
-        const fetchData = async () => {
-            return await geSongsByArtist(artist)
-        }
-        fetchData().then((data: Song[] | string) => {
-            if (data === null || data.length === 0) {
-                alert("no songs found for artist: " + artist)
-                //find out if this is nessery/menning do we need to re render home page to show all songs 
+    return async (dispatch: AppDispatch) => {
+     
+           const songs: Song[] |string= await geSongsByArtist(artist)
+           if (songs === null || songs.length === 0) {
+            alert("no songs found for artist: " + artist)
+                   //find out if this is nessery/menning do we need to re render home page to show all songs 
                 //or is the last song search okay?
                 dispatch(getSongsAction());
-            }
-            else if (typeof data !== "string") {
-                dispatch(receivedSongs(data))
-            }
-
-            else alert(data)
-        })
+           }
+               else if (typeof songs !== "string")
+                    dispatch(receivedSongs(songs))
 
     }
 }
 
 export const deleteSongAction = (id: string) => {
     debugger;
-    return (dispatch: AppDispatch) => {
-        const fetchData = async () => { return await deleteSong(id) }
-        fetchData().then((data: string) => {
+    return async(dispatch: AppDispatch) => {
+        const data:string =await deleteSong(id) 
             alert(data);
             if (data === "deleted document")
                 dispatch(deleteSongRedux(id))
-        })
+     
     }
 }
 
 
 export const editSongThunk = (song: Song, id: string) => {
     debugger;
-    return (dispatch: AppDispatch) => {
-        const fetchData = async () => { return await updateSong(song, id) }
-        fetchData().then((data) => {
-            debugger
+    return async (dispatch: AppDispatch) => {
+        const data: Song|string=  await updateSong(song, id) 
+    
             if (typeof data !== 'string') {
 
                 dispatch(editSong(song))
             }
             else alert(data);
-        })
+        
     }
 }
 export type addSongtype = typeof addSong;

@@ -15,7 +15,7 @@ import {
 
 
 const Add: React.FC<{addNewSong:Function}> = (props) => {
-  const song: AddSong = {title: '', artist: '', length: 0, price: 0 }
+  const song: AddSong = {title: '', artist: '',gener:Gener.CLASSICAL, length: 0, price: 0 }
 
   const validationSchema = Yup.object({
     title:
