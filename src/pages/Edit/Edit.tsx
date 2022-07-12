@@ -15,7 +15,7 @@ import {
     //FieldProps,
 } from 'formik';
 import { geSongById } from '../../api/getById';
-import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
+
 
 
 
@@ -23,27 +23,29 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
  const Edit: React.FC<{songsList:Song[],editSong:Function}> = (props) => {
  
     const { id } = useParams();
-    
-    const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','','CLASSICAL',0,0);
-    const [editId, setEditId]=useState(new Song('','','','CLASSICAL',0,0))
+    //from redux
+    // const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','','CLASSICAL',0,0);
+    const [getSongToEdit, setGetSongToEdit]=useState(new Song('','','','CLASSICAL',0,0))
     let data:Song|string|null=null
     useEffect(()=>{
-      debugger
+   
         const func=async() =>{
          data= await geSongById(id||'')
+        
         if(typeof data !=='string' )
-            setEditId(data)
+        setGetSongToEdit(data)
+         
       }
       func()
   
     }
     ,[])
-    //WHAT IS THE MORE CURRECT WAY TO GET THE ELEMENT TO EDIT FROM REDUX OR FROM SERVER ?
+
 
     const validationSchema = Yup.object({
         title:
             Yup.string()
-                .required('genre is required'),
+                .required('title is required'),
         length: Yup
             .number()
             .min(2, 'length should be of minimum 2 ')
@@ -51,10 +53,10 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
     });
 
 
-    //getSongToEdit.genre=Genre[getSongToEdit.genre]
 
-    const initialValues: Song =getSongToEdit//editId// getSongToEdit;
+    const initialValues: Song = getSongToEdit;
     const formik = useFormik({
+      enableReinitialize:true,
         initialValues: initialValues,
         validationSchema: validationSchema,
         onSubmit: (values: Song, { setSubmitting }: FormikHelpers<Song>) => {
@@ -67,9 +69,9 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
         }
     });
     const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
-    //const genreTypes = [1, 2, 3, 4]
+   
     console.log(formik.initialValues.genre)
-    // if (data){
+  
       return <>
       <h1>Edit Song</h1>
       {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
@@ -158,8 +160,8 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
 
       <BackButton />
   </>
-  // }
-  // else return <><h1>no song yet...</h1></>
+  //  }
+  //  else return <><h1>just a moment...</h1></>
     
 }
 
