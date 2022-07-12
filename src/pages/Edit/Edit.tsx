@@ -1,80 +1,112 @@
 import React, { useEffect, useState } from 'react';
 import BackButton from '../../components/backButton/BackButton';
-import {Genre, Song } from '../../Song';
+import { Genre, Song } from '../../Song';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Card, CardMedia, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {
-    Formik,
-    FormikHelpers,
-    FormikProps,
-    Form,
-    Field, ErrorMessage, useFormik
-    //FieldProps,
+  Formik,
+  FormikHelpers,
+  FormikProps,
+  Form,
+  Field, ErrorMessage, useFormik
+  //FieldProps,
 } from 'formik';
 import { geSongById } from '../../api/getById';
 
+import { makeStyles } from '@mui/styles';
+const useStyles = makeStyles({
+  CardMidea: {
+  maxWidth:400,
+ height: 550,
+
+     top: 0,
+     left: 0,
+     backgroundColor:'yellow',
+     flex:4,
+     borderTopRightRadius:60,
+     borderBottomRightRadius:40
+  },
+  Card:{
+    maxWidth:605,
+    margin:'auto',
+   minHeight:550,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    boxShadow: '3px 3px 20px rgba(0, 0, 0, 0.1)',
+  }
+});
 
 
 
+const Edit: React.FC<{ songsList: Song[], editSong: Function }> = (props) => {
+  const classes = useStyles();
+  const { id } = useParams();
+  //from redux
+  // const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','','CLASSICAL',0,0);
+  const [getSongToEdit, setGetSongToEdit] = useState(new Song('', '', '', 'CLASSICAL', 0, 0))
+  let data: Song | string | null = null
+  useEffect(() => {
 
- const Edit: React.FC<{songsList:Song[],editSong:Function}> = (props) => {
- 
-    const { id } = useParams();
-    //from redux
-    // const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','','CLASSICAL',0,0);
-    const [getSongToEdit, setGetSongToEdit]=useState(new Song('','','','CLASSICAL',0,0))
-    let data:Song|string|null=null
-    useEffect(()=>{
-   
-        const func=async() =>{
-         data= await geSongById(id||'')
-        
-        if(typeof data !=='string' )
+    const func = async () => {
+      data = await geSongById(id || '')
+
+      if (typeof data !== 'string')
         setGetSongToEdit(data)
-         
-      }
-      func()
-  
+
     }
-    ,[])
+    func()
+
+  }
+    , [])
 
 
-    const validationSchema = Yup.object({
-        title:
-            Yup.string()
-                .required('title is required'),
-        length: Yup
-            .number()
-            .min(2, 'length should be of minimum 2 ')
-            .required('length is required'),
-    });
+  const validationSchema = Yup.object({
+    title:
+      Yup.string()
+        .required('title is required'),
+    length: Yup
+      .number()
+      .min(2, 'length should be of minimum 2 ')
+      .required('length is required'),
+  });
 
 
 
-    const initialValues: Song = getSongToEdit;
-    const formik = useFormik({
-      enableReinitialize:true,
-        initialValues: initialValues,
-        validationSchema: validationSchema,
-        onSubmit: (values: Song, { setSubmitting }: FormikHelpers<Song>) => {
-            debugger
-            console.log({ values, setSubmitting });
-            props.editSong(values,id)
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
+  const initialValues: Song = getSongToEdit;
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values: Song, { setSubmitting }: FormikHelpers<Song>) => {
 
-        }
-    });
-    const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
-   
-    console.log(formik.initialValues.genre)
+      console.log({ values, setSubmitting });
+      props.editSong(values, id)
+      alert(JSON.stringify(values, null, 2));
+      setSubmitting(false);
+
+    }
+  });
+  const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
+
+  console.log(formik.initialValues.genre)
+
+  return <>
+    <h1 style={{ color:'white'}}>Edit Song</h1>
   
-      return <>
-      <h1>Edit Song</h1>
-      {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
+    <Card className={classes.Card} >
+   
+      <CardMedia 
+      className={classes.CardMidea}
+        component="img"
+        height="140"
+        image="https://cloud.githubusercontent.com/assets/3484527/19622568/9c972d44-987a-11e6-9dcc-93d496ef408f.png"
+        alt="green iguana"
+      />
+     
       <form onSubmit={formik.handleSubmit} >
         <TextField id="title"
 
@@ -103,27 +135,21 @@ import { geSongById } from '../../api/getById';
           name="genre"
           label="genre"
           select
-          
+
           value={formik.values.genre}
           defaultValue=""
           onChange={formik.handleChange}
           error={formik.touched.genre && Boolean(formik.errors.genre)}
           helperText={formik.touched.genre && formik.errors.genre}
         >
-            {
-          genreTypes.map((option:string,index:number) => (
-        
-            <MenuItem key={option+index} value={option}>
-              {option}
-            </MenuItem>
-          ))}
-          {/* {
-          genreTypes.map((option:Genre,index:number) => (
-        
-            <MenuItem key={Genre[option]+index} value={Genre[option]}>
-              {Genre[option]}
-            </MenuItem>
-          ))} */}
+          {
+            genreTypes.map((option: string, index: number) => (
+
+              <MenuItem key={option + index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+
         </TextField>
 
         <br></br>
@@ -152,25 +178,26 @@ import { geSongById } from '../../api/getById';
         />
         <br></br>
         <Button color="primary" variant="contained" type="submit">
-         Edit </Button>
+          Edit </Button>
       </form>
 
-
-    <BackButton />
+      </Card>
+      <BackButton />
 
       <BackButton />
-  </>
-  //  }
-  //  else return <><h1>just a moment...</h1></>
+ 
+
+    </>
+
     
 }
 
- 
 
-  
- 
 
-export  default Edit
+
+
+
+    export  default Edit
 
 
 
