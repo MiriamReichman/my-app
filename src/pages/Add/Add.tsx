@@ -15,7 +15,7 @@ import {
 
 
 const Add: React.FC<{addNewSong:Function}> = (props) => {
-  const song: AddSong = {title: '', artist: '',genre:Genre.CLASSICAL, length: 0, price: 0 }
+  const song: AddSong = {title: '', artist: '',genre:'RAP', length: 0, price: 0 }
 
   const validationSchema = Yup.object({
     title:
@@ -43,7 +43,7 @@ const Add: React.FC<{addNewSong:Function}> = (props) => {
 
     }
   });
-  const genreTypes = [Genre.CLASSICAL, Genre.POP, Genre.RAP, Genre.ROCK]
+  const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
   return (
     <>
 
@@ -74,7 +74,8 @@ const Add: React.FC<{addNewSong:Function}> = (props) => {
           />
           <br></br>
           <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-            id="Genre"
+            id="genre"
+            name="genre"
             select
             label="Genre"
             value={formik.values.genre }
@@ -84,9 +85,9 @@ const Add: React.FC<{addNewSong:Function}> = (props) => {
             helperText={formik.touched.genre && formik.errors.genre}
           >  
        
-            {genreTypes.map((option:Genre,index:number) => (
-              <MenuItem key={Genre[option]+index} value={Genre[option]}>
-                {Genre[option]}
+            {genreTypes.map((option:string,index:number) => (
+              <MenuItem key={option+index} value={option}>
+                {option}
               </MenuItem>
             ))}
           </TextField>

@@ -24,8 +24,8 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
  
     const { id } = useParams();
     
-    const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','',2,0,0);
-    const [editId, setEditId]=useState(new Song('','','',2,0,0))
+    const getSongToEdit=props.songsList.find(song => song.id === id)||new Song('','','','CLASSICAL',0,0);
+    const [editId, setEditId]=useState(new Song('','','','CLASSICAL',0,0))
     let data:Song|string|null=null
     useEffect(()=>{
       debugger
@@ -51,9 +51,9 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
     });
 
 
- 
+    //getSongToEdit.genre=Genre[getSongToEdit.genre]
 
-    const initialValues: Song =editId// getSongToEdit;
+    const initialValues: Song =getSongToEdit//editId// getSongToEdit;
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validationSchema,
@@ -66,9 +66,11 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
 
         }
     });
-    const genreTypes = [Genre.CLASSICAL, Genre.POP, Genre.RAP, Genre.ROCK]
-    console.log(Genre[formik.initialValues.genre])
-    if (data){return <>
+    const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
+    //const genreTypes = [1, 2, 3, 4]
+    console.log(formik.initialValues.genre)
+    // if (data){
+      return <>
       <h1>Edit Song</h1>
       {/* <SongInfoForm song={getSongToEdit} buttonDescription={"Edit"} action={editSong} /> */}
       <form onSubmit={formik.handleSubmit} >
@@ -95,21 +97,31 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
         />
         <br></br>
         <TextField sx={{ m: 1, minWidth: 220, backgroundColor: 'white', borderRadius: 2, margin: 2 }}
-          id="Genre"
+          id="genre"
+          name="genre"
+          label="genre"
           select
-          label="Genre"
-          value={Genre[formik.values.genre]}
-          onSelect={formik.handleChange}
+          
+          value={formik.values.genre}
+          defaultValue=""
+          onChange={formik.handleChange}
           error={formik.touched.genre && Boolean(formik.errors.genre)}
           helperText={formik.touched.genre && formik.errors.genre}
         >
-          {
+            {
+          genreTypes.map((option:string,index:number) => (
+        
+            <MenuItem key={option+index} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+          {/* {
           genreTypes.map((option:Genre,index:number) => (
         
             <MenuItem key={Genre[option]+index} value={Genre[option]}>
               {Genre[option]}
             </MenuItem>
-          ))}
+          ))} */}
         </TextField>
 
         <br></br>
@@ -146,8 +158,8 @@ import SongInfoForm from '../../components/SongInfoForm/SongInfoForm';
 
       <BackButton />
   </>
-  }
-  else return <><h1>no song yet...</h1></>
+  // }
+  // else return <><h1>no song yet...</h1></>
     
 }
 

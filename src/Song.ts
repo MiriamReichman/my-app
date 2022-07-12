@@ -19,9 +19,13 @@ export enum Genre{
     ROCK, POP, RAP, CLASSICAL
 }
 
+
+
+
+
 export class Song{
     constructor(public id:string,public title:string,public artist:string,
-        public genre:Genre,public length:number,public price:number
+        public genre:'RAP'|'POP'|'CLASSICAL'|'ROCK',public length:number,public price:number
         ){
     }
 }
@@ -32,7 +36,7 @@ export interface AddSong {
   title:string,
   artist:string,
 
- genre?: Genre,
+ genre? :'RAP'|'POP'|'CLASSICAL'|'ROCK',
   length:number,
    price: number
 };
