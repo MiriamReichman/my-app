@@ -21,10 +21,13 @@ const navigate = useNavigate();
 
   return (
     <div className='row'>
-      <DeleteIcon onClick={deletHendler}/>
+      <DeleteIcon onClick={deletHendler} />
 
       <EditIcon onClick={handelEdit} />
-      {props.item.title} | {props.item.artist}|{props.item.price}$
+      <span style={{flexGrow: 1,flexShrink: 0,alignSelf: 'center'}}>| {props.item.title}</span>
+      <span style={{flexGrow: 2 ,flexShrink: 0,alignSelf: 'center'}}>| {props.item.artist}</span>
+      <span style={{flexGrow: 1,flexShrink: 0,alignSelf: 'center'}}>| {props.item.price}$</span>
+      
     </div>
   )
 }

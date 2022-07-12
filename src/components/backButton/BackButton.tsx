@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     padding: '0 30px',
     position: 'absolute',
     left: 12
+   
   },
 });
 

@@ -13,8 +13,23 @@ import Row from '../../components/Header and Rows/Row';
 import { Genre, Song } from '../../Song';
 import HederTitels from '../../components/Header and Rows/HederTitels';
 
-const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Function}>= (props) => {
+import { makeStyles } from '@mui/styles';
+const useStyles = makeStyles({
+  Button: {
+  
+    borderBlockColor: 'white',
 
+    color: 'white',
+    height: 100,
+    width:100,
+    padding: '0 30px',
+    position: 'absolute',
+ margin:'auto',
+  }
+});
+
+const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Function}>= (props) => {
+    const classes= useStyles();
 
     const songsList=props.songsList;
   
@@ -39,7 +54,7 @@ const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Func
         </div>
 
         {/* <CustomizedTables /> */}
-        <AddCircleIcon onClick={add} />
+        <AddCircleIcon onClick={add} className={classes.Button} />
     </div>;
 }
 

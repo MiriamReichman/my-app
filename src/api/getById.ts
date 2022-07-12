@@ -18,7 +18,7 @@ export async function geSongById(id: string):Promise<Song|string> {
 
         // 👇️ "response status is: 200"
         console.log('response status is: ', status);
-        debugger;
+      
         return data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
