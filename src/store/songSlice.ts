@@ -25,15 +25,12 @@ const songsSlice = createSlice({
         receivedSongsRedux(state, action: PayloadAction<Song[]>) {
 
             state.songs = action.payload
-            console.log("current song receivedSongs", (state.songs))
-
         },
         addSongRedux(state, action: PayloadAction<Song>) {
 
             const song = action.payload;
             state.songs.push(song);
 
-            console.log("current song addSong", (state.songs))
         },
         deleteSongRedux(state, action: PayloadAction<string>) {
 
@@ -42,15 +39,15 @@ const songsSlice = createSlice({
                 return song.id !== id
 
             })
-            console.log("current song deleteSongRedux", (state.songs))
+           
 
         },
         editSongRedux(state, action: PayloadAction<Song>) {
-//find and set 
             const songUpdated = action.payload;
-            state.songs = state.songs.filter((song) => { return song.id !== songUpdated.id });
-            state.songs.push(songUpdated);
-            console.log("current song editSong", (state.songs))
+            const songToReplace=state.songs.findIndex((song) => { return song.id === songUpdated.id });
+            if(songToReplace)
+                state.songs[songToReplace]=songUpdated
+          
         }
     },
 })
