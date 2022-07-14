@@ -13,21 +13,21 @@ import {
 } from 'formik';
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
-  CardMidea: {
-  maxWidth:400,
- height: 550,
+  CardMedia: {
+    maxWidth: 400,
+    height: 550,
 
-     top: 0,
-     left: 0,
-     backgroundColor:'yellow',
-     flex:4,
-     borderTopRightRadius:60,
-     borderBottomRightRadius:40
+    top: 0,
+    left: 0,
+    backgroundColor: 'yellow',
+    flex: 4,
+    borderTopRightRadius: 60,
+    borderBottomRightRadius: 40
   },
-  Card:{
-    maxWidth:605,
-    margin:'auto',
-   minHeight:550,
+  Card: {
+    maxWidth: 605,
+    margin: 'auto',
+    minHeight: 550,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
 
 const Add: React.FC<{ addNewSong: Function }> = (props) => {
   const song: AddSong = { title: '', artist: '', genre: 'RAP', length: 0, price: 0 }
-  const classes= useStyles();
+  const classes = useStyles();
   const validationSchema = Yup.object({
     title:
       Yup.string()
@@ -54,28 +54,23 @@ const Add: React.FC<{ addNewSong: Function }> = (props) => {
     initialValues: initialValues,
     validationSchema: validationSchema,
     onSubmit: (values: AddSong, { setSubmitting }: FormikHelpers<AddSong>) => {
-
-      //console.log('will soon use dispatch with this action name:',props.onsubmit)
-      console.log({ values, setSubmitting });
       props.addNewSong(values);
-
-      alert(JSON.stringify(values, null, 2));
       setSubmitting(false);
 
     }
   });
-  const genreTypes = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
+  const genreTypes: Genre[] = ['CLASSICAL', 'POP', 'RAP', 'ROCK']
   return (
     <>
 
       <h1 className='heder'>Add New Song</h1>
-      {/* <SongInfoForm song={song} buttonDescription={"Add"} action={addSong} /> */}
+
       <div>
 
         <Card className={classes.Card} >
 
           <CardMedia
-            className={classes.CardMidea}
+            className={classes.CardMedia}
             component="img"
             height="140"
             image="https://cloud.githubusercontent.com/assets/3484527/19622568/9c972d44-987a-11e6-9dcc-93d496ef408f.png"

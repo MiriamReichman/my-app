@@ -1,41 +1,33 @@
-import React, { useEffect, useState } from 'react';
-
-
+import React from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useNavigate } from 'react-router-dom';
-
 import './Home.css'
-
 import Search from '../../components/searchInput/search';
-import CustomizedTables from '../../components/table';
-import Row from '../../components/Header and Rows/Row';
+import Row from './Header and Rows/Row';
 
 import { Genre, Song } from '../../Song';
-import HederTitels from '../../components/Header and Rows/HederTitels';
-
+import HederTitels from './Header and Rows/HederTitels';
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
-  Button: {
-  
-    borderBlockColor: 'white',
-
-    color: 'white',
-    height: 100,
-    width:100,
-    padding: '0 30px',
-    position: 'absolute',
- margin:'auto',
-  }
+    Button: {
+        borderBlockColor: 'white',
+        color: 'white',
+        height: 100,
+        width: 100,
+        padding: '0 30px',
+        position: 'absolute',
+        margin: 'auto',
+    }
 });
 
-const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Function}>= (props) => {
-    const classes= useStyles();
+const Home: React.FC<{ songsList: Song[], searchArtist: Function, deleteSong: Function }> = (props) => {
+    const classes = useStyles();
 
-    const songsList=props.songsList;
-  
+    const songsList = props.songsList;
+
 
     const navigate = useNavigate();
-    const add = () => {
+    const addHandler = () => {
         navigate('/songs/new');
     }
     return <div className='Home'>
@@ -47,18 +39,13 @@ const Home : React.FC<{ songsList: Song[],searchArtist:Function ,deleteSong:Func
         <HederTitels />
         <div>
             {
-                Object.values(songsList).map((item: Song,index:number) => {
-                    return <Row item={item} key={item.id+index} deleteSong={props.deleteSong}/>;
+                Object.values(songsList).map((item: Song, index: number) => {
+                    return <Row item={item} key={item.id + index} deleteSong={props.deleteSong} />;
                 })
             }
         </div>
-
-        {/* <CustomizedTables /> */}
-        <AddCircleIcon onClick={add} className={classes.Button} />
+        <AddCircleIcon onClick={addHandler} className={classes.Button} />
     </div>;
 }
-
-
-// #endregion
 
 export default Home;

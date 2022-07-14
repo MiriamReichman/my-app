@@ -6,7 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 const Search: React.FC<{searchArtist:Function}> = (props) => {
-  const [search, setSearch] = useState('')
+  const [searchArtistInput, setSearchArtistInput] = useState('')
   
   return (
     <Paper
@@ -21,12 +21,12 @@ const Search: React.FC<{searchArtist:Function}> = (props) => {
         sx={{ ml: 1, flex: 1 }}
         placeholder="Enter song artist "
         inputProps={{ 'aria-label': 'search ' }}
-        value={search}
-        onChange={(e:React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
+        value={searchArtistInput}
+        onChange={(e:React.ChangeEvent<HTMLInputElement>) => setSearchArtistInput(e.target.value)}
     
       />
   
-      <SearchIcon sx={{ p: '5px' }} type="submit" onClick={() => { props.searchArtist(search) }} />
+      <SearchIcon sx={{ p: '5px' }} type="submit" onClick={() => { props.searchArtist(searchArtistInput) }} />
 
 
     </Paper>

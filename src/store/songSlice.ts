@@ -2,7 +2,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Genre, Song, AddSong } from "../Song";
 
-import { geSongs } from '../api/apiCalles'
+import { getSongs } from '../api/getSongs'
 import { createSong } from '../api/post';
 import { geSongsByArtist } from "../api/getAllByArtist";
 import { deleteSong } from "../api/delete";
@@ -22,13 +22,13 @@ const songsSlice = createSlice({
     initialState,
     name: "songs",
     reducers: {
-        receivedSongs(state, action: PayloadAction<Song[]>) {
+        receivedSongsRedux(state, action: PayloadAction<Song[]>) {
 
             state.songs = action.payload
             console.log("current song receivedSongs", (state.songs))
 
         },
-        addSong(state, action: PayloadAction<Song>) {
+        addSongRedux(state, action: PayloadAction<Song>) {
 
             const song = action.payload;
             state.songs.push(song);
@@ -45,8 +45,8 @@ const songsSlice = createSlice({
             console.log("current song deleteSongRedux", (state.songs))
 
         },
-        editSong(state, action: PayloadAction<Song>) {
-
+        editSongRedux(state, action: PayloadAction<Song>) {
+//find and set 
             const songUpdated = action.payload;
             state.songs = state.songs.filter((song) => { return song.id !== songUpdated.id });
             state.songs.push(songUpdated);
@@ -56,46 +56,44 @@ const songsSlice = createSlice({
 })
 
 
-export const getSongsAction = () => {
+export const getSongsThunk = () => {
     return async (dispatch: AppDispatch) => {
-        const songs: Song[] | string = await geSongs();
+        const songs: Song[] | string = await getSongs();
         if (songs !== null)
             if (typeof songs !== "string")
-                dispatch(receivedSongs(songs))
+                dispatch(receivedSongsRedux(songs))
             else alert(songs)
 
     }
 }
 
-export const addSongsAction = (song: AddSong) => {
+export const addSongsThunk = (song: AddSong) => {
     return async (dispatch: AppDispatch) => {
         const Newsong: Song | string = await createSong(song);
         if (Newsong !== null)
             if (typeof Newsong !== "string")
-                dispatch(addSong(Newsong))
+                dispatch(addSongRedux(Newsong))
             else alert(Newsong)
 
     }
 }
 
-export const getSongsByArtist = (artist: string) => {
+export const getSongsByArtistThunk = (artist: string) => {
 
     return async (dispatch: AppDispatch) => {
 
         const songs: Song[] | string = await geSongsByArtist(artist)
         if (songs === null || songs.length === 0) {
             alert("no songs found for artist: " + artist)
-            //find out if this is nessery/menning do we need to re render home page to show all songs 
-            //or is the last song search okay?
-            dispatch(getSongsAction());
+            dispatch(getSongsThunk());
         }
         else if (typeof songs !== "string")
-            dispatch(receivedSongs(songs))
+            dispatch(receivedSongsRedux(songs))
 
     }
 }
 
-export const deleteSongAction = (id: string) => {
+export const deleteSongThunk = (id: string) => {
 
     return async (dispatch: AppDispatch) => {
         const data: string = await deleteSong(id)
@@ -114,12 +112,12 @@ export const editSongThunk = (song: Song, id: string) => {
 
         if (typeof data !== 'string') {
 
-            dispatch(editSong(song))
+            dispatch(editSongRedux(song))
         }
         else alert(data);
 
     }
 }
-export type addSongtype = typeof addSong;
-export const { receivedSongs, addSong, editSong, deleteSongRedux } = songsSlice.actions;
+export type addSongtype = typeof addSongRedux;
+export const { receivedSongsRedux, addSongRedux, editSongRedux, deleteSongRedux } = songsSlice.actions;
 export default songsSlice.reducer;

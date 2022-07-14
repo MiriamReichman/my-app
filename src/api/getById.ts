@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { Song } from '../Song'
 
-export async function geSongById(id: string):Promise<Song|string> {
+export async function getSongById(id: string):Promise<Song|string> {
     try {
         // 👇️ const data: GetUsersResponse
         const { data, status } = await axios.get<Song>(

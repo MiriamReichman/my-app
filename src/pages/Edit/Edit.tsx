@@ -7,32 +7,28 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Card, CardMedia, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import {
-  Formik,
   FormikHelpers,
-  FormikProps,
-  Form,
-  Field, ErrorMessage, useFormik
+  useFormik
   //FieldProps,
 } from 'formik';
-import { geSongById } from '../../api/getById';
+import { getSongById } from '../../api/getById';
 
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
   CardMidea: {
-  maxWidth:400,
- height: 550,
-
-     top: 0,
-     left: 0,
-     backgroundColor:'yellow',
-     flex:4,
-     borderTopRightRadius:60,
-     borderBottomRightRadius:40
+    maxWidth: 400,
+    height: 550,
+    top: 0,
+    left: 0,
+    backgroundColor: 'yellow',
+    flex: 4,
+    borderTopRightRadius: 60,
+    borderBottomRightRadius: 40
   },
-  Card:{
-    maxWidth:605,
-    margin:'auto',
-   minHeight:550,
+  Card: {
+    maxWidth: 605,
+    margin: 'auto',
+    minHeight: 550,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -52,13 +48,13 @@ const Edit: React.FC<{ songsList: Song[], editSong: Function }> = (props) => {
   useEffect(() => {
 
     const func = async () => {
-      data = await geSongById(id || '')
+      data = await getSongById(id || '')
 
       if (typeof data !== 'string')
         setGetSongToEdit(data)
 
     }
-    func()
+    func();
 
   }
     , [])
@@ -95,18 +91,18 @@ const Edit: React.FC<{ songsList: Song[], editSong: Function }> = (props) => {
   console.log(formik.initialValues.genre)
 
   return <>
-    <h1 style={{ color:'white'}}>Edit Song</h1>
-  
+    <h1 style={{ color: 'white' }}>Edit Song</h1>
+
     <Card className={classes.Card} >
-   
-      <CardMedia 
-      className={classes.CardMidea}
+
+      <CardMedia
+        className={classes.CardMidea}
         component="img"
         height="140"
         image="https://cloud.githubusercontent.com/assets/3484527/19622568/9c972d44-987a-11e6-9dcc-93d496ef408f.png"
         alt="green iguana"
       />
-     
+
       <form onSubmit={formik.handleSubmit} >
         <TextField id="title"
 
@@ -181,15 +177,15 @@ const Edit: React.FC<{ songsList: Song[], editSong: Function }> = (props) => {
           Edit </Button>
       </form>
 
-      </Card>
-      <BackButton />
+    </Card>
+    <BackButton />
 
-      <BackButton />
- 
+    <BackButton />
 
-    </>
 
-    
+  </>
+
+
 }
 
 
@@ -197,7 +193,7 @@ const Edit: React.FC<{ songsList: Song[], editSong: Function }> = (props) => {
 
 
 
-    export  default Edit
+export default Edit
 
 
 
