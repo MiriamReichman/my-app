@@ -8,6 +8,7 @@ import Row from './Header and Rows/Row';
 import { Genre, Song } from '../../moudel/Song';
 import HederTitels from './Header and Rows/HederTitels';
 import { makeStyles } from '@mui/styles';
+import { SongCard } from './otherOptionsToDisplaySongs/SongCard';
 const useStyles = makeStyles({
     Button: {
         borderBlockColor: 'white',
@@ -43,6 +44,7 @@ const Home: React.FC<{ songsList: Song[], searchArtist: Function, deleteSong: Fu
                     return <Row item={item} key={item.id + index} deleteSong={props.deleteSong} />;
                 })
             }
+            
         </div>
         <AddCircleIcon onClick={addHandler} className={classes.Button} />
     </div>;

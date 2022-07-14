@@ -6,7 +6,7 @@ import { Song,AddSong } from '../moudel/Song';
 
 export async function createSong(song:AddSong):Promise<Song|string> {
   try {
-    // 👇️ const data: CreateUserResponse
+   
     const { data } = await axios.post<Song>(
       url,
       song,
