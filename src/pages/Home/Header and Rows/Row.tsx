@@ -1,7 +1,7 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Song } from '../../../Song';
+import { Song } from '../../../moudel/Song';
 import './Row.css'
 import { useNavigate } from 'react-router-dom';
 

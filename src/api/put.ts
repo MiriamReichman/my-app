@@ -1,10 +1,11 @@
 import axios from 'axios';
-import {Song} from '../Song';
+import { url } from '../config';
+import {Song} from '../moudel/Song';
 export async function updateSong(song:Song,id:string):Promise<Song|string>{
   try {
     // 👇️ const data: UpdateUserResponse
     const { data } = await axios.put<Song>(
-      'http://localhost:8989/Songs/'+id,
+      url+id,
     song,
       {
         headers: {

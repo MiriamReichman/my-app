@@ -5,7 +5,7 @@ import './Home.css'
 import Search from '../../components/searchInput/search';
 import Row from './Header and Rows/Row';
 
-import { Genre, Song } from '../../Song';
+import { Genre, Song } from '../../moudel/Song';
 import HederTitels from './Header and Rows/HederTitels';
 import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({

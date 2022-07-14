@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BackButton from '../../components/backButton/BackButton';
-import { Genre, Song } from '../../Song';
+import { Genre, Song } from '../../moudel/Song';
 import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';

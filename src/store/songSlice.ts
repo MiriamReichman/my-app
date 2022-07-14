@@ -1,6 +1,6 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Genre, Song, AddSong } from "../Song";
+import { Genre, Song, AddSong } from "../moudel/Song";
 
 import { getSongs } from '../api/getSongs'
 import { createSong } from '../api/post';

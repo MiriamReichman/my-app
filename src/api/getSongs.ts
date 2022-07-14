@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { url } from '../config';
 
-import  {Song} from '../Song'
+import  {Song} from '../moudel/Song'
 
 
 export async function getSongs():Promise<Song[]|string>{
   try {
     // 👇️ const data: GetUsersResponse
     const { data, status } = await axios.get<Song[]>(
-      'http://localhost:8989/Songs',
+      url,
       {
         headers: {
           Accept: 'application/json',

@@ -1,6 +1,6 @@
 import React from 'react'
 import BackButton from '../../components/backButton/BackButton'
-import { Song, Genre, AddSong } from '../../Song'
+import { Song, Genre, AddSong } from '../../moudel/Song'
 import './Add.css'
 
 import * as Yup from 'yup';

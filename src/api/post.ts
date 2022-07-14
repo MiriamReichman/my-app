@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { Song,AddSong } from '../Song';
+import { url } from '../config';
+import { Song,AddSong } from '../moudel/Song';
 
 
 
@@ -7,7 +8,7 @@ export async function createSong(song:AddSong):Promise<Song|string> {
   try {
     // 👇️ const data: CreateUserResponse
     const { data } = await axios.post<Song>(
-      'http://localhost:8989/Songs',
+      url,
       song,
       {
         headers: {

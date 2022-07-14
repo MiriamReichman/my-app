@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hook";
 import { getSongsThunk, addSongsThunk, getSongsByArtistThunk, deleteSongThunk, editSongThunk } from "../store/songSlice";
 import Add from './Add/Add';
 import Edit from './Edit/Edit';
-import { AddSong, Song } from '../Song';
+import { AddSong, Song } from '../moudel/Song';
 
 export const ParentComponnent = () => {
   const dispatch = useAppDispatch();

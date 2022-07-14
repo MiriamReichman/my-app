@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-
+import { url } from '../config';
 
 export async function deleteSong(id: string):Promise<string> {
   try {
     // 👇️ const data: UpdateUserResponse
     const { data, status } = await axios.delete<string>(
-      'http://localhost:8989/Songs/'+id,
+      url+id,
       {
         headers: {
           Accept: 'application/json',
