@@ -1,7 +1,7 @@
 import React from 'react'
 import BackButton from '../../components/backButton/BackButton'
 import { Song, Genre, AddSong } from '../../moudel/Song'
-import './Add.css'
+
 
 import * as Yup from 'yup';
 import TextField from '@mui/material/TextField';
@@ -11,29 +11,7 @@ import { Card, CardMedia, MenuItem } from '@mui/material';
 import {
   Formik, FormikHelpers, FormikProps, Form, Field, ErrorMessage, useFormik  //FieldProps,
 } from 'formik';
-import { makeStyles } from '@mui/styles';
-const useStyles = makeStyles({
-  CardMedia: {
-    maxWidth: 400,
-    height: 550,
-
-    top: 0,
-    left: 0,
-    backgroundColor: 'yellow',
-    flex: 4,
-    borderTopRightRadius: 60,
-    borderBottomRightRadius: 40
-  },
-  Card: {
-    maxWidth: 605,
-    margin: 'auto',
-    minHeight: 550,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    boxShadow: '3px 3px 20px rgba(0, 0, 0, 0.1)',
-  }
-});
+import useStyles from './Add.styile';
 
 const Add: React.FC<{ addNewSong: Function }> = (props) => {
   const song: AddSong = { title: '', artist: '', genre: 'RAP', length: 0, price: 0 }
@@ -63,7 +41,7 @@ const Add: React.FC<{ addNewSong: Function }> = (props) => {
   return (
     <>
 
-      <h1 className='heder'>Add New Song</h1>
+      <h1 className={classes.heder}>Add New Song</h1>
 
       <div>
 

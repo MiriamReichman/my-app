@@ -1,1 +1,1 @@
-export  const url:string='http://localhost:8989/Songs/';
+export  const  GET_SONGS_URL:string='http://localhost:8989/Songs/';

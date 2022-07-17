@@ -9,7 +9,7 @@ import { AddSong, Song } from '../moudel/Song';
 
 export const ParentComponnent = () => {
   const dispatch = useAppDispatch();
-  const Songs: Song[] = useAppSelector(state => state.songs.songs)
+  const songs: Song[] = useAppSelector(state => state.songs.songs)
   useEffect(() => {
     dispatch(getSongsThunk());
   }, [])
@@ -23,17 +23,17 @@ export const ParentComponnent = () => {
   const deleteSong = (id: string) => {
     dispatch(deleteSongThunk(id));
   }
-  const SongsByArtist = (artist: string) => {
+  const songsByArtist = (artist: string) => {
     dispatch(getSongsByArtistThunk(artist))
   }
 
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home songsList={Songs} searchArtist={SongsByArtist} deleteSong={deleteSong} />} />
+        <Route path="/" element={<Home songsList={songs} searchArtist={songsByArtist} deleteSong={deleteSong} />} />
         <Route path="/songs">
           <Route path="/songs/new" element={<Add addNewSong={addNewSong} />} />
-          <Route path="/songs/edit/:id" element={<Edit songsList={Songs} editSong={editSong} />} />
+          <Route path="/songs/edit/:id" element={<Edit songsList={songs} editSong={editSong} />} />
         </Route>
       </Routes>
     </div>

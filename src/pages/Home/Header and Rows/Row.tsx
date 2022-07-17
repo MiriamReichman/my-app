@@ -24,9 +24,9 @@ const navigate = useNavigate();
       <DeleteIcon onClick={deletHendler} />
 
       <EditIcon onClick={handelEdit} />
-      <span style={{flexGrow: 1,flexShrink: 0,alignSelf: 'center'}}>| {props.item.title}</span>
-      <span style={{flexGrow: 2 ,flexShrink: 0,alignSelf: 'center'}}>| {props.item.artist}</span>
-      <span style={{flexGrow: 1,flexShrink: 0,alignSelf: 'center'}}>| {props.item.price}$</span>
+      <span >| {props.item.title}</span>
+      <span >| {props.item.artist}</span>
+      <span >| {props.item.price}$</span>
       
     </div>
   )

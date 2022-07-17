@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { url } from '../config';
+
+import {  GET_SONGS_URL } from '../config';
 
 import  {Song} from '../moudel/Song'
 
@@ -8,7 +9,7 @@ export async function getSongs():Promise<Song[]|string>{
   try {
     // 👇️ const data: GetUsersResponse
     const { data, status } = await axios.get<Song[]>(
-      url,
+      GET_SONGS_URL,
       {
         headers: {
           Accept: 'application/json',

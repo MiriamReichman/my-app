@@ -1,13 +1,13 @@
 import axios from 'axios';
 
 import { Song } from '../moudel/Song'
-import { url } from '../config';
+import {  GET_SONGS_URL } from '../config';
 
 export async function geSongsByArtist(artist: string):Promise<Song[]|string> {
     try {
       
         const { data, status,  } = await axios.get<Song[]>(
-            url+'specificArtistSongs/' + artist,
+            GET_SONGS_URL+'specificArtistSongs/' + artist,
             {
                 headers: {
                     Accept: 'application/json',
